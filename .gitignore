@@ -1,0 +1,25 @@
+# Heavy data files
+pdfs/
+markdown_output/
+chroma_store/
+extraction_output.csv
+PA_Business_Rules.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Virtual env / uv
+.venv/
+*.egg-info/
+
+# Secrets
+.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
