@@ -14,64 +14,23 @@ python --version  # should be 3.12.x or 3.13.x
 
 ---
 
-## Quick Setup (Recommended)
-
-Use the provided `setup.sh` to create the `RAG_RUN` virtual environment, install all dependencies, and load your API keys in one step.
-
-**First, create your `.env` file:**
-```bash
-cp .env.example .env
-# then open .env and fill in your API keys
-```
-
-**Then run setup:**
-```bash
-# Option 1 — sets up everything (env active only during the script)
-bash setup.sh
-
-# Option 2 — sets up AND keeps the env active in your current shell
-source setup.sh
-```
-
-`setup.sh` does the following automatically:
-
-| Step | What it does |
-|------|-------------|
-| **Python** | Finds Python 3.12+ — checks `python3.12`, then pyenv (installs 3.12.9 if needed), then `python3` |
-| **Venv** | Creates `RAG_RUN/` in the project folder (skips if already exists) |
-| **Packages** | Runs `pip install -r requirements.txt` |
-| **API keys** | Reads `.env` and exports all keys into the shell environment |
-| **Activate** | Activates the env (persists in your shell when using `source setup.sh`) |
-
-To activate the environment in a new terminal later:
-```bash
-source RAG_RUN/bin/activate
-```
-
-To deactivate:
-```bash
-deactivate
-```
-
----
-
-## Manual Installation
-
-If you prefer not to use `setup.sh`:
+## Installation
 
 ```bash
-python3.12 -m venv RAG_RUN
-source RAG_RUN/bin/activate
 pip install -r requirements.txt
 ```
 
-Set your API keys (or use a `.env` file — see `.env.example`):
+Set your API key — copy `.env.example` to `.env` and fill in your key:
 ```bash
-export OPENROUTER_API_KEY=sk-or-v1-...
+cp .env.example .env
+```
+
+Or export directly:
+```bash
 export GROQ_API_KEY=gsk_...
 ```
 
-On Kaggle, add keys via **Add-ons > Secrets** and enable **Attach to session**.
+On Kaggle, add `GROQ_API_KEY` via **Add-ons > Secrets** and enable **Attach to session**.
 
 ---
 
@@ -79,12 +38,12 @@ On Kaggle, add keys via **Add-ons > Secrets** and enable **Attach to session**.
 
 Open `payer_policy_pipeline.ipynb` and run all cells in order.
 
-By default the pipeline processes **all PDFs** in the `pdfs/Sample_PsO_ADS_Track/` folder. To limit the number of PDFs, change `MAX_PDFS` in the last cell:
+By default the pipeline processes **all PDFs** in the `pdfs/Sample_PsO_ADS_Track/` folder. To limit the number of PDFs, set `MAX_PDFS` in your `.env`:
 
-```python
-MAX_PDFS = 5      # process first 5 PDFs
-MAX_PDFS = 1      # process just 1 PDF
-MAX_PDFS = None   # process all PDFs (default)
+```
+MAX_PDFS=5      # process first 5 PDFs
+MAX_PDFS=1      # process just 1 PDF
+MAX_PDFS=       # process all PDFs (default)
 ```
 
 Results are written to `submission.csv`. Re-running skips PDFs whose markdown already exists and skips brands already present in the CSV.
