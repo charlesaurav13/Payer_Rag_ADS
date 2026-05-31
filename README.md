@@ -15,15 +15,12 @@ python --version  # should be 3.13.x
 ---
 
 ## Installation
-
-You will receive a `.zip` file containing the notebook and all required files. Extract it and install the dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
 
 Set your Groq API key:
-
+or edit or make a .env file, see .env.example file for reference.
 ```bash
 export GROQ_API_KEY=gsk_...
 ```
@@ -44,7 +41,7 @@ MAX_PDFS = 1      # process just 1 PDF
 MAX_PDFS = None   # process all PDFs (default)
 ```
 
-Results are written to `extraction_output.csv`. Re-running skips PDFs whose markdown already exists and skips brands already present in the CSV.
+Results are written to `submission.csv`. Re-running skips PDFs whose markdown already exists and skips brands already present in the CSV.
 
 ---
 
