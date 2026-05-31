@@ -6,26 +6,72 @@ End-to-end RAG pipeline that extracts **12 Prior Authorization (PA) parameters**
 
 ## Python Version
 
-Requires **Python 3.13**. Python 3.14+ is not supported (tokenizers build fails).
+Requires **Python 3.12+**. Python 3.14+ is not supported (tokenizers build fails).
 
 ```bash
-python --version  # should be 3.13.x
+python --version  # should be 3.12.x or 3.13.x
 ```
 
 ---
 
-## Installation
+## Quick Setup (Recommended)
+
+Use the provided `setup.sh` to create the `RAG_RUN` virtual environment, install all dependencies, and load your API keys in one step.
+
+**First, create your `.env` file:**
 ```bash
+cp .env.example .env
+# then open .env and fill in your API keys
+```
+
+**Then run setup:**
+```bash
+# Option 1 — sets up everything (env active only during the script)
+bash setup.sh
+
+# Option 2 — sets up AND keeps the env active in your current shell
+source setup.sh
+```
+
+`setup.sh` does the following automatically:
+
+| Step | What it does |
+|------|-------------|
+| **Python** | Finds Python 3.12+ — checks `python3.12`, then pyenv (installs 3.12.9 if needed), then `python3` |
+| **Venv** | Creates `RAG_RUN/` in the project folder (skips if already exists) |
+| **Packages** | Runs `pip install -r requirements.txt` |
+| **API keys** | Reads `.env` and exports all keys into the shell environment |
+| **Activate** | Activates the env (persists in your shell when using `source setup.sh`) |
+
+To activate the environment in a new terminal later:
+```bash
+source RAG_RUN/bin/activate
+```
+
+To deactivate:
+```bash
+deactivate
+```
+
+---
+
+## Manual Installation
+
+If you prefer not to use `setup.sh`:
+
+```bash
+python3.12 -m venv RAG_RUN
+source RAG_RUN/bin/activate
 pip install -r requirements.txt
 ```
 
-Set your Groq API key:
-or edit or make a .env file, see .env.example file for reference.
+Set your API keys (or use a `.env` file — see `.env.example`):
 ```bash
+export OPENROUTER_API_KEY=sk-or-v1-...
 export GROQ_API_KEY=gsk_...
 ```
 
-On Kaggle, add `GROQ_API_KEY` via **Add-ons > Secrets** and enable **Attach to session**.
+On Kaggle, add keys via **Add-ons > Secrets** and enable **Attach to session**.
 
 ---
 
