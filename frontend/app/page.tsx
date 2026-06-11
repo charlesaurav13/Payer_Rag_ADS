@@ -313,7 +313,7 @@ export default function Home() {
               {submitting ? (
                 <>
                   <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                  Sending to backend…
+                  Processing…
                 </>
               ) : (
                 <>Analyze {files.length > 0 ? `${files.length} PDF${files.length > 1 ? "s" : ""}` : "PDFs"}</>
